@@ -1,30 +1,31 @@
 
 package hellojpa;
-import javax.persistence.Entity;
-import javax.persistence.Id;
+import javax.persistence.*;
+import java.util.Date;
 
 @Entity
 public class Member {
+
     @Id
     private Long id;
 
-    private String name;
-//Getter, Setter ...
+    @Column(name="name")  //데이터베이스 컬럼명은 name 으로 하겠다.
+    private String username;
 
+    private Integer age;
 
-    public Long getId() {
-        return id;
-    }
+    @Enumerated(EnumType.STRING)
+    private RoleType roleType;
 
-    public void setId(Long id) {
-        this.id = id;
-    }
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date createDate;
 
-    public String getName() {
-        return name;
-    }
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date lastModifiedDate;
 
-    public void setName(String name) {
-        this.name = name;
+    @Lob
+    private String description;
+
+    public Member() {
     }
 }
