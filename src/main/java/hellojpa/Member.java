@@ -1,31 +1,47 @@
 
 package hellojpa;
 import javax.persistence.*;
+import javax.security.auth.login.LoginException;
 import java.util.Date;
 
 @Entity
 public class Member {
 
-    @Id
+    @Id @GeneratedValue
+    @Column(name="MEMBER_ID")
     private Long id;
 
-    @Column(name="name")  //데이터베이스 컬럼명은 name 으로 하겠다.
+    @Column(name="USERNAME")
     private String username;
 
-    private Integer age;
+//    @Column(name = "ITEM_ID")
+//    private Long temId;
 
-    @Enumerated(EnumType.STRING)
-    private RoleType roleType;
+    @ManyToOne
+    @JoinColumn(name="TEAM_ID")
+    private Team team;
 
-    @Temporal(TemporalType.TIMESTAMP)
-    private Date createDate;
+    public Long getId() {
+        return id;
+    }
 
-    @Temporal(TemporalType.TIMESTAMP)
-    private Date lastModifiedDate;
+    public void setId(Long id) {
+        this.id = id;
+    }
 
-    @Lob
-    private String description;
+    public String getUsername() {
+        return username;
+    }
 
-    public Member() {
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+    public Team getTeam() {
+        return team;
+    }
+
+    public void setTeam(Team team) {
+        this.team = team;
     }
 }
